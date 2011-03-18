@@ -1,5 +1,6 @@
 #include "myLib.h"
 #include "pacman.h"
+#include "dot.h"
 
 int main() {
 	REG_DISPCNT = MODE3 | BG2_ENABLE;

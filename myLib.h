@@ -4,7 +4,6 @@
 #include "colors.h"
 #include "dma.h"
 #include "buttons.h"
-#include "dot.h"
 
 #define REG_DISPCNT *(unsigned short *)0x4000000
 #define MODE3 3
