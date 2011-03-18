@@ -4,10 +4,11 @@
 #include "dot.h"
 
 #define NUMDOTS 5
+#define NUMDELTAS 5
 
 int main() {
 	REG_DISPCNT = MODE3 | BG2_ENABLE;
-	int deltas[] = {2, 3, 4};
+	int deltas[] = {2, 3, 4, 5, 6};
 	
 	// Make Pacman and his shadow
 	PACMAN pacman;
@@ -22,7 +23,7 @@ int main() {
 		dots[i].size = 3;
 		dots[i].row = rand() % (SCREENHEIGHT-dots[i].size);
 		dots[i].col = SCREENWIDTH - 1;
-		dots[i].del = deltas[rand() % 3];
+		dots[i].del = deltas[rand() % NUMDELTAS];
 		drawRect(dots[i].col, dots[i].row, dots[i].size, dots[i].size, WHITE);
 		oldDots[i] = dots[i];
 	}
@@ -52,7 +53,7 @@ int main() {
 			if (videoBuffer[OFFSET(dots[i].row, dots[i].col, SCREENWIDTH)] || dots[i].col<0) {
 				dots[i].row = rand() % (SCREENHEIGHT-dots[i].size);
 				dots[i].col = SCREENWIDTH-1;
-				dots[i].del = deltas[rand()%3];
+				dots[i].del = deltas[rand() % NUMDELTAS];
 			}
 		}
 		
