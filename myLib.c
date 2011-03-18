@@ -4,7 +4,7 @@ unsigned short *videoBuffer = (unsigned short *)0x6000000;
 volatile unsigned short *scanLineCounter = (unsigned short *)0x4000006;
 
 void setPixel(int r, int c, u16 color) {
-	videoBuffer[OFFSET(80, 120, SCREENWIDTH)] = color;
+	videoBuffer[OFFSET(r, c, SCREENWIDTH)] = color;
 }
 
 void drawRect(int x, int y, int width, int height, u16 color) {
