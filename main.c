@@ -4,12 +4,12 @@
 #include "dot.h"
 
 #define NUMDOTS 5
-#define NUMDELTAS 5
+#define NUMDELTAS 4
 
 void initDot(int i);
 
 DOT dots[NUMDOTS];
-int deltas[] = {2, 3, 4, 5, 6};
+int deltas[] = {2, 3, 4, 5};
 int ghostFrequency = 64;
 
 int main() {
@@ -52,7 +52,7 @@ int main() {
 		
 		for (int i = 0; i < NUMDOTS; i++) {
 			drawRect(oldDots[i].col, oldDots[i].row, oldDots[i].size, oldDots[i].size, BLACK);
-			if (videoBuffer[OFFSET(dots[i].row, dots[i].col, SCREENWIDTH)] || dots[i].col<-dots[i].size)
+			if (videoBuffer[OFFSET(dots[i].row, dots[i].col, SCREENWIDTH)] || dots[i].col<=0)
 				initDot(i);
 		}
 		
@@ -75,6 +75,6 @@ void initDot(int i) {
 	}
 	
 	dots[i].row = rand() % (SCREENHEIGHT-dots[i].size);
-	dots[i].col = SCREENWIDTH - 1;
+	dots[i].col = SCREENWIDTH - dots[i].size;
 	dots[i].del = deltas[rand() % NUMDELTAS];
 }
