@@ -15,10 +15,12 @@ int main() {
 	DOT dot;
 	dot.row = SCREENHEIGHT/2;
 	dot.col = SCREENWIDTH-1;
-	dot.del = -3;
+	dot.del = 3;
 	setPixel(dot.row, dot.col, WHITE);
 	
 	while (1) {
+		// Move dots
+		dot.col -= dot.del;
 		
 		// Move Pacman
 		if (KEY_DOWN_NOW(BUTTON_DOWN))
@@ -31,6 +33,10 @@ int main() {
 			pacman.row++;
 		
 		waitForVblank();
+		
+		setPixel(dot.row, dot.col+dot.del, BLACK);
+		setPixel(dot.row, dot.col, WHITE);
+		
 		drawRect(oldPacman.row, oldPacman.col, oldPacman.size, oldPacman.size, BLACK);
 		drawRect(pacman.row, pacman.col, pacman.size, pacman.size, YELLOW);
 		oldPacman = pacman;
