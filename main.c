@@ -10,6 +10,7 @@ void initDot(int i);
 
 DOT dots[NUMDOTS];
 int deltas[] = {2, 3, 4, 5, 6};
+int ghostFrequency = 64;
 
 int main() {
 	REG_DISPCNT = MODE3 | BG2_ENABLE;
@@ -65,7 +66,14 @@ int main() {
 }
 
 void initDot(int i) {
-	dots[i].size = 3;
+	if ((rand() % ghostFrequency))
+		dots[i].size = 3;
+	else {
+		dots[i].size = 16;
+		if (ghostFrequency > 2)
+			ghostFrequency /= 2;
+	}
+	
 	dots[i].row = rand() % (SCREENHEIGHT-dots[i].size);
 	dots[i].col = SCREENWIDTH - 1;
 	dots[i].del = deltas[rand() % NUMDELTAS];
