@@ -1,9 +1,11 @@
+#include <stdlib.h>
 #include "myLib.h"
 #include "pacman.h"
 #include "dot.h"
 
 int main() {
 	REG_DISPCNT = MODE3 | BG2_ENABLE;
+	int deltas[] = {2, 3, 4};
 	
 	// Make Pacman and his shadow
 	PACMAN pacman;
@@ -16,7 +18,7 @@ int main() {
 	DOT dot;
 	dot.row = SCREENHEIGHT/2;
 	dot.col = SCREENWIDTH-1;
-	dot.del = 3;
+	dot.del = deltas[rand()%3];
 	setPixel(dot.row, dot.col, WHITE);
 	
 	while (1) {
@@ -39,12 +41,12 @@ int main() {
 		drawRect(pacman.row, pacman.col, pacman.size, pacman.size, YELLOW);
 		
 		setPixel(dot.row, dot.col+dot.del, BLACK);
-		if (!videoBuffer[OFFSET(dot.row, dot.col, SCREENWIDTH)])
+		if (!videoBuffer[OFFSET(dot.row, dot.col, SCREENWIDTH)] && dot.col>=0)
 			setPixel(dot.row, dot.col, WHITE);
 		else {
 			dot.row = SCREENHEIGHT/2;
 			dot.col = SCREENWIDTH-1;
-			dot.del = 3;
+			dot.del = deltas[rand()%3];
 			setPixel(dot.row, dot.col, WHITE);
 		}
 		
