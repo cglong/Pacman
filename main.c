@@ -52,7 +52,7 @@ int main() {
 		
 		for (int i = 0; i < NUMDOTS; i++) {
 			drawRect(oldDots[i].col, oldDots[i].row, oldDots[i].size, oldDots[i].size, BLACK);
-			if (videoBuffer[OFFSET(dots[i].row, dots[i].col, SCREENWIDTH)] || dots[i].col<0)
+			if (videoBuffer[OFFSET(dots[i].row, dots[i].col, SCREENWIDTH)] || dots[i].col<-dots[i].size)
 				initDot(i);
 		}
 		
