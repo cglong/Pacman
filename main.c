@@ -3,6 +3,8 @@
 #include "pacman.h"
 #include "dot.h"
 
+#define NUMDOTS 5
+
 int main() {
 	REG_DISPCNT = MODE3 | BG2_ENABLE;
 	int deltas[] = {2, 3, 4};
@@ -15,15 +17,19 @@ int main() {
 	PACMAN oldPacman = pacman;
 	
 	// Make dots
-	DOT dot;
-	dot.row = rand() % SCREENHEIGHT;
-	dot.col = SCREENWIDTH-1;
-	dot.del = deltas[rand()%3];
-	setPixel(dot.row, dot.col, WHITE);
+	DOT dots[NUMDOTS], oldDots[NUMDOTS];
+	for (int i = 0; i < NUMDOTS; i++) {
+		dots[i].row = rand() % SCREENHEIGHT;
+		dots[i].col = SCREENWIDTH - 1;
+		dots[i].del = deltas[rand() % 3];
+		setPixel(dots[i].row, dots[i].col, WHITE);
+		oldDots[i] = dots[i];
+	}
 	
 	while (1) {
 		// Move dots
-		dot.col -= dot.del;
+		for (int i = 0; i < NUMDOTS; i++)
+			dots[i].col -= dots[i].del;
 		
 		// Move Pacman
 		if (KEY_DOWN_NOW(BUTTON_DOWN))
@@ -40,14 +46,18 @@ int main() {
 		drawRect(oldPacman.row, oldPacman.col, oldPacman.size, oldPacman.size, BLACK);
 		drawRect(pacman.row, pacman.col, pacman.size, pacman.size, YELLOW);
 		
-		setPixel(dot.row, dot.col+dot.del, BLACK);
-		if (!videoBuffer[OFFSET(dot.row, dot.col, SCREENWIDTH)] && dot.col>=0)
-			setPixel(dot.row, dot.col, WHITE);
-		else {
-			dot.row = rand() % SCREENHEIGHT;
-			dot.col = SCREENWIDTH-1;
-			dot.del = deltas[rand()%3];
-			setPixel(dot.row, dot.col, WHITE);
+		for (int i = 0; i < NUMDOTS; i++) {
+			setPixel(oldDots[i].row, oldDots[i].col, BLACK);
+			if (videoBuffer[OFFSET(dots[i].row, dots[i].col, SCREENWIDTH)] || dots[i].col<0) {
+				dots[i].row = rand() % SCREENHEIGHT;
+				dots[i].col = SCREENWIDTH-1;
+				dots[i].del = deltas[rand()%3];
+			}
+		}
+		
+		for (int i = 0; i < NUMDOTS; i++) {
+			setPixel(dots[i].row, dots[i].col, WHITE);
+			oldDots[i] = dots[i];
 		}
 		
 		oldPacman = pacman;
