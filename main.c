@@ -2,6 +2,7 @@
 #include "myLib.h"
 #include "pacman.h"
 #include "dot.h"
+#include "Pacman.h"
 
 #define NUMDOTS 5
 #define NUMDELTAS 4
@@ -10,7 +11,7 @@ void initDot(int i);
 
 DOT dots[NUMDOTS];
 int deltas[] = {2, 3, 4, 5};
-int ghostFrequency = 64;
+int ghostFrequency = 32;
 
 int main() {
 	REG_DISPCNT = MODE3 | BG2_ENABLE;
@@ -77,4 +78,13 @@ void initDot(int i) {
 	dots[i].row = rand() % (SCREENHEIGHT-dots[i].size);
 	dots[i].col = SCREENWIDTH - dots[i].size;
 	dots[i].del = deltas[rand() % NUMDELTAS];
+}
+
+void drawPacman(int x, int y) {
+	for (int i = 0; i < PACMAN_HEIGHT; i++)
+		for (int j = 0; j < PACMAN_WIDTH; j++) {
+			REG_DMA3SAD = (vu32) &Pacman[PACMAN_WIDTH * i + j];
+			REG_DMA3DAD = (vu32) &videoBuffer[i*PACMAN_WIDTH];
+			REG_DMA3CNT = PACMAN_WIDTH | DMA_ON;
+		}
 }
