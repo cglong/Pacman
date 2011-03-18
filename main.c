@@ -16,7 +16,7 @@ int main() {
 	
 	// Make dots
 	DOT dot;
-	dot.row = SCREENHEIGHT/2;
+	dot.row = rand() % SCREENHEIGHT;
 	dot.col = SCREENWIDTH-1;
 	dot.del = deltas[rand()%3];
 	setPixel(dot.row, dot.col, WHITE);
@@ -44,7 +44,7 @@ int main() {
 		if (!videoBuffer[OFFSET(dot.row, dot.col, SCREENWIDTH)] && dot.col>=0)
 			setPixel(dot.row, dot.col, WHITE);
 		else {
-			dot.row = SCREENHEIGHT/2;
+			dot.row = rand() % SCREENHEIGHT;
 			dot.col = SCREENWIDTH-1;
 			dot.del = deltas[rand()%3];
 			setPixel(dot.row, dot.col, WHITE);
