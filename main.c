@@ -7,7 +7,7 @@ int main() {
 	
 	// Make Pacman and his shadow
 	PACMAN pacman;
-	pacman.size = 24;
+	pacman.size = 16;
 	pacman.row = 0;
 	pacman.col = (SCREENHEIGHT-pacman.size)/2;
 	PACMAN oldPacman = pacman;
