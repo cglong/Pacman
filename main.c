@@ -11,7 +11,15 @@ int main() {
 	PACMAN oldPacman = pacman;
 	
 	while (1) {
-		// do math
+		if (KEY_DOWN_NOW(BUTTON_DOWN))
+			pacman.col++;
+		if (KEY_DOWN_NOW(BUTTON_UP))
+			pacman.col--;
+		if (KEY_DOWN_NOW(BUTTON_LEFT))
+			pacman.row--;
+		if (KEY_DOWN_NOW(BUTTON_RIGHT))
+			pacman.row++;
+		
 		waitForVblank();
 		drawRect(oldPacman.row, oldPacman.col, oldPacman.size, oldPacman.size, BLACK);
 		drawRect(pacman.row, pacman.col, pacman.size, pacman.size, YELLOW);
