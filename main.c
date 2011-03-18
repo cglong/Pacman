@@ -35,11 +35,19 @@ int main() {
 		
 		waitForVblank();
 		
-		setPixel(dot.row, dot.col+dot.del, BLACK);
-		setPixel(dot.row, dot.col, WHITE);
-		
 		drawRect(oldPacman.row, oldPacman.col, oldPacman.size, oldPacman.size, BLACK);
 		drawRect(pacman.row, pacman.col, pacman.size, pacman.size, YELLOW);
+		
+		setPixel(dot.row, dot.col+dot.del, BLACK);
+		if (!videoBuffer[OFFSET(dot.row, dot.col, SCREENWIDTH)])
+			setPixel(dot.row, dot.col, WHITE);
+		else {
+			dot.row = SCREENHEIGHT/2;
+			dot.col = SCREENWIDTH-1;
+			dot.del = 3;
+			setPixel(dot.row, dot.col, WHITE);
+		}
+		
 		oldPacman = pacman;
 	}
 }
