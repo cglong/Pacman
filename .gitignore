@@ -1,0 +1,4 @@
+*.o
+gbadeps
+*.elf
+*.gba
