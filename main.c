@@ -6,9 +6,13 @@
 #define NUMDOTS 5
 #define NUMDELTAS 5
 
+void initDot(int i);
+
+DOT dots[NUMDOTS];
+int deltas[] = {2, 3, 4, 5, 6};
+
 int main() {
 	REG_DISPCNT = MODE3 | BG2_ENABLE;
-	int deltas[] = {2, 3, 4, 5, 6};
 	
 	// Make Pacman and his shadow
 	PACMAN pacman;
@@ -18,12 +22,9 @@ int main() {
 	PACMAN oldPacman = pacman;
 	
 	// Make dots
-	DOT dots[NUMDOTS], oldDots[NUMDOTS];
+	DOT oldDots[NUMDOTS];
 	for (int i = 0; i < NUMDOTS; i++) {
-		dots[i].size = 3;
-		dots[i].row = rand() % (SCREENHEIGHT-dots[i].size);
-		dots[i].col = SCREENWIDTH - 1;
-		dots[i].del = deltas[rand() % NUMDELTAS];
+		initDot(i);
 		drawRect(dots[i].col, dots[i].row, dots[i].size, dots[i].size, WHITE);
 		oldDots[i] = dots[i];
 	}
@@ -50,11 +51,8 @@ int main() {
 		
 		for (int i = 0; i < NUMDOTS; i++) {
 			drawRect(oldDots[i].col, oldDots[i].row, oldDots[i].size, oldDots[i].size, BLACK);
-			if (videoBuffer[OFFSET(dots[i].row, dots[i].col, SCREENWIDTH)] || dots[i].col<0) {
-				dots[i].row = rand() % (SCREENHEIGHT-dots[i].size);
-				dots[i].col = SCREENWIDTH-1;
-				dots[i].del = deltas[rand() % NUMDELTAS];
-			}
+			if (videoBuffer[OFFSET(dots[i].row, dots[i].col, SCREENWIDTH)] || dots[i].col<0)
+				initDot(i);
 		}
 		
 		for (int i = 0; i < NUMDOTS; i++) {
@@ -64,4 +62,11 @@ int main() {
 		
 		oldPacman = pacman;
 	}
+}
+
+void initDot(int i) {
+	dots[i].size = 3;
+	dots[i].row = rand() % (SCREENHEIGHT-dots[i].size);
+	dots[i].col = SCREENWIDTH - 1;
+	dots[i].del = deltas[rand() % NUMDELTAS];
 }
