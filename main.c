@@ -8,6 +8,7 @@
 #define NUMDELTAS 4
 
 void initDot(int i);
+void drawPacman(int x, int y);
 
 DOT dots[NUMDOTS];
 int deltas[] = {2, 3, 4, 5};
@@ -49,7 +50,8 @@ int main() {
 		waitForVblank();
 		
 		drawRect(oldPacman.row, oldPacman.col, oldPacman.size, oldPacman.size, BLACK);
-		drawRect(pacman.row, pacman.col, pacman.size, pacman.size, YELLOW);
+		//drawRect(pacman.row, pacman.col, pacman.size, pacman.size, YELLOW);
+		drawPacman(pacman.col, pacman.row);
 		
 		for (int i = 0; i < NUMDOTS; i++) {
 			drawRect(oldDots[i].col, oldDots[i].row, oldDots[i].size, oldDots[i].size, BLACK);
@@ -84,7 +86,7 @@ void drawPacman(int x, int y) {
 	for (int i = 0; i < PACMAN_HEIGHT; i++)
 		for (int j = 0; j < PACMAN_WIDTH; j++) {
 			REG_DMA3SAD = (vu32) &Pacman[PACMAN_WIDTH * i + j];
-			REG_DMA3DAD = (vu32) &videoBuffer[i*PACMAN_WIDTH];
+			REG_DMA3DAD = (vu32) &videoBuffer[OFFSET(i+x, y, SCREENWIDTH)];
 			REG_DMA3CNT = PACMAN_WIDTH | DMA_ON;
 		}
 }
