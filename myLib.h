@@ -4,6 +4,7 @@
 #include "colors.h"
 #include "dma.h"
 #include "buttons.h"
+#include "rect.h"
 
 #define REG_DISPCNT *(unsigned short *)0x4000000
 #define MODE3 3
@@ -21,5 +22,7 @@ extern unsigned short *videoBuffer;
 void setPixel(int r, int c, u16 color);
 void drawRect(int r, int c, int width, int height, u16 color);
 void waitForVblank();
+void drawImage3(int x, int y, int width, int height, const u16* image);
+int rectCollides(Rect a, Rect b);
 
 #endif

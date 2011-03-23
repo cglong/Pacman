@@ -6,6 +6,7 @@ typedef struct {
 	int col;
 	int del;
 	int size;
+	int isGhost;
 } DOT;
 
 #endif

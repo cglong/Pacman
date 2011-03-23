@@ -10,12 +10,12 @@ PROGNAME = PacManTheLostLevels
 
 # The object files you want to compile into your program
 # This should be a space (SPACE!) separated list of .o files
-OFILES = main.o myLib.o Pacman.o
+OFILES = main.o myLib.o ghost.o end.o title.o
 
 # The header files you have created.
 # This is necessary to determine when to recompile for files.
 # This should be a space (SPACE!) separated list of .h files
-HFILES = myLib.h colors.h dma.h buttons.h dot.h pacman.h Pacman.h
+HFILES = myLib.h colors.h dma.h buttons.h dot.h pacman.h ghost.h end.h title.h rect.h
 
 # The flags to run the vba program with
 # for a list of options run /usr/local/cs2110-tools/bin/vbam
