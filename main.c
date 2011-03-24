@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include "myLib.h"
-#include "pacman.h"
 #include "dot.h"
 #include "ghost.h"
 #include "title.h"
@@ -21,7 +20,7 @@ void drawTitle();
 void drawEnd();
 void drawPacman(int x, int y);
 
-PACMAN pacman, oldPacman;
+Rect pacman, oldPacman;
 DOT dots[NUMDOTS], oldDots[NUMDOTS];
 int deltas[] = {2, 3, 4, 5};
 int ghostFrequency;
@@ -61,9 +60,9 @@ void initialize() {
 	ghostFrequency = 32;
 	
 	// Make Pacman and his shadow
-	pacman.size = 16;
+	pacman.height = pacman.width = 16;
 	pacman.row = 0;
-	pacman.col = (SCREENHEIGHT-pacman.size)/2;
+	pacman.col = (SCREENHEIGHT-pacman.height)/2;
 	
 	// Make dots
 	for (int i = 0; i < NUMDOTS; i++) {
@@ -82,18 +81,18 @@ void update() {
 		dots[i].col -= dots[i].del;
 	
 	// Move Pacman
-	if (KEY_DOWN_NOW(BUTTON_DOWN) && pacman.col < SCREENHEIGHT - pacman.size)
+	if (KEY_DOWN_NOW(BUTTON_DOWN) && pacman.col < SCREENHEIGHT - pacman.height)
 		pacman.col++;
 	if (KEY_DOWN_NOW(BUTTON_UP) && pacman.col > 0)
 		pacman.col--;
 	if (KEY_DOWN_NOW(BUTTON_LEFT) && pacman.row > 0)
 		pacman.row--;
-	if (KEY_DOWN_NOW(BUTTON_RIGHT) && pacman.row < SCREENWIDTH - pacman.size)
+	if (KEY_DOWN_NOW(BUTTON_RIGHT) && pacman.row < SCREENWIDTH - pacman.width)
 		pacman.row++;
 }
 
 void draw() {
-	drawRect(oldPacman.row, oldPacman.col, oldPacman.size, oldPacman.size, BLACK);
+	drawRect(oldPacman.row, oldPacman.col, oldPacman.width, oldPacman.height, BLACK);
 	drawPacman(pacman.col, pacman.row);
 	
 	for (int i = 0; i < NUMDOTS; i++) {
