@@ -5,6 +5,7 @@
 #include "ghost.h"
 #include "title.h"
 #include "end.h"
+#include "Pacman.h"
 
 #define NUMDOTS 5
 #define NUMDELTAS 4
@@ -18,6 +19,7 @@ void drawDot(int i);
 void drawGhost(int x, int y);
 void drawTitle();
 void drawEnd();
+void drawPacman(int x, int y);
 
 PACMAN pacman, oldPacman;
 DOT dots[NUMDOTS], oldDots[NUMDOTS];
@@ -92,7 +94,7 @@ void update() {
 
 void draw() {
 	drawRect(oldPacman.row, oldPacman.col, oldPacman.size, oldPacman.size, BLACK);
-	drawRect(pacman.row, pacman.col, pacman.size, pacman.size, YELLOW);
+	drawPacman(pacman.col, pacman.row);
 	
 	for (int i = 0; i < NUMDOTS; i++) {
 		drawRect(oldDots[i].col, oldDots[i].row, oldDots[i].size, oldDots[i].size, BLACK);
@@ -139,6 +141,10 @@ void drawDot(int i) {
 
 void drawGhost(int x, int y) {
 	drawImage3(x, y, GHOST_WIDTH, GHOST_HEIGHT, ghost);
+}
+
+void drawPacman(int x, int y) {
+	drawImage3(x, y, PACMAN_WIDTH, PACMAN_HEIGHT, Pacman);
 }
 
 void drawTitle() {
