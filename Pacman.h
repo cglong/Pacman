@@ -8,10 +8,8 @@
  * 
  * Quote/Fortune of the Day!
  * -------------------------
- * After all, what is your host's purpose in having a party?
- * Surely not for you to enjoy yourself.
- * If that were their sole purpose,
- *  they'd have simply sent champagne and women over to your place by taxi.  ~P.J. O'Rourke
+ * A scout troop consists of twelve little kids dressed like schmucks
+ *  following a big schmuck dressed like a kid.  ~Jack Benny
  * 
  * All bug reports / feature requests are to be sent to Brandon (brandon.whitehead@gatech.edu)
  */
