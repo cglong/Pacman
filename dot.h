@@ -1,11 +1,11 @@
 #ifndef DOT_H
 #define DOT_H
 
+#include "rect.h"
+
 typedef struct {
-	int row;
-	int col;
+	Rect rect;
 	int del;
-	int size;
 	int isGhost;
 } DOT;
 

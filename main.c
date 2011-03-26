@@ -48,10 +48,11 @@ int main() {
 
 void initialize() {
 	DOT emptyDot;
-	emptyDot.row = 0;
-	emptyDot.col = 0;
+	emptyDot.rect.row = 0;
+	emptyDot.rect.col = 0;
+	emptyDot.rect.height = 0;
+	emptyDot.rect.width = 0;
 	emptyDot.del = 0;
-	emptyDot.size = 0;
 	emptyDot.isGhost = 0;
 	
 	for (int i = 0; i < NUMDOTS; i++)
@@ -78,7 +79,7 @@ void clear() {
 void update() {
 	// Move dots
 	for (int i = 0; i < NUMDOTS; i++)
-		dots[i].col -= dots[i].del;
+		dots[i].rect.col -= dots[i].del;
 	
 	// Move Pacman
 	if (KEY_DOWN_NOW(BUTTON_DOWN) && pacman.col < SCREENHEIGHT - pacman.height)
@@ -96,13 +97,13 @@ void draw() {
 	drawPacman(pacman.col, pacman.row);
 	
 	for (int i = 0; i < NUMDOTS; i++) {
-		drawRect(oldDots[i].col, oldDots[i].row, oldDots[i].size, oldDots[i].size, BLACK);
-		if (videoBuffer[OFFSET(dots[i].row, dots[i].col, SCREENWIDTH)] == YELLOW ||
-			videoBuffer[OFFSET(dots[i].row+dots[i].size, dots[i].col, SCREENWIDTH)] == YELLOW ||
-			videoBuffer[OFFSET(dots[i].row, dots[i].col+dots[i].size, SCREENWIDTH)] == YELLOW ||
-			videoBuffer[OFFSET(dots[i].row+dots[i].size, dots[i].col+dots[i].size, SCREENWIDTH)] == YELLOW ||
-			dots[i].col<=0) {
-			if (dots[i].isGhost && dots[i].col > 0)
+		drawRect(oldDots[i].rect.col, oldDots[i].rect.row, oldDots[i].rect.width, oldDots[i].rect.height, BLACK);
+		if (videoBuffer[OFFSET(dots[i].rect.row, dots[i].rect.col, SCREENWIDTH)] == YELLOW ||
+			videoBuffer[OFFSET(dots[i].rect.row+dots[i].rect.width, dots[i].rect.col, SCREENWIDTH)] == YELLOW ||
+			videoBuffer[OFFSET(dots[i].rect.row, dots[i].rect.col+dots[i].rect.width, SCREENWIDTH)] == YELLOW ||
+			videoBuffer[OFFSET(dots[i].rect.row+dots[i].rect.height, dots[i].rect.col+dots[i].rect.width, SCREENWIDTH)] == YELLOW ||
+			dots[i].rect.col<=0) {
+			if (dots[i].isGhost && dots[i].rect.col > 0)
 				drawEnd();
 			else
 				initDot(i);
@@ -117,25 +118,25 @@ void draw() {
 
 void initDot(int i) {
 	if ((rand() % ghostFrequency)) {
-		dots[i].size = 3;
+		dots[i].rect.width = dots[i].rect.height = 3;
 		dots[i].isGhost = 0;
 	} else {
-		dots[i].size = 16;
+		dots[i].rect.width = dots[i].rect.height = 16;
 		dots[i].isGhost = 1;
 		if (ghostFrequency > 2)
 			ghostFrequency /= 2;
 	}
 	
-	dots[i].row = rand() % (SCREENHEIGHT-dots[i].size);
-	dots[i].col = SCREENWIDTH - dots[i].size;
+	dots[i].rect.row = rand() % (SCREENHEIGHT-dots[i].rect.height);
+	dots[i].rect.col = SCREENWIDTH - dots[i].rect.width;
 	dots[i].del = deltas[rand() % NUMDELTAS];
 }
 
 void drawDot(int i) {
 	if (dots[i].isGhost)
-		drawGhost(dots[i].row, dots[i].col);
+		drawGhost(dots[i].rect.row, dots[i].rect.col);
 	else
-		drawRect(dots[i].col, dots[i].row, dots[i].size, dots[i].size, WHITE);
+		drawRect(dots[i].rect.col, dots[i].rect.row, dots[i].rect.width, dots[i].rect.height, WHITE);
 }
 
 void drawGhost(int x, int y) {
