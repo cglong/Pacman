@@ -98,11 +98,7 @@ void draw() {
 	
 	for (int i = 0; i < NUMDOTS; i++) {
 		drawRect(oldDots[i].rect.col, oldDots[i].rect.row, oldDots[i].rect.width, oldDots[i].rect.height, BLACK);
-		if (videoBuffer[OFFSET(dots[i].rect.row, dots[i].rect.col, SCREENWIDTH)] == YELLOW ||
-			videoBuffer[OFFSET(dots[i].rect.row+dots[i].rect.width, dots[i].rect.col, SCREENWIDTH)] == YELLOW ||
-			videoBuffer[OFFSET(dots[i].rect.row, dots[i].rect.col+dots[i].rect.width, SCREENWIDTH)] == YELLOW ||
-			videoBuffer[OFFSET(dots[i].rect.row+dots[i].rect.height, dots[i].rect.col+dots[i].rect.width, SCREENWIDTH)] == YELLOW ||
-			dots[i].rect.col<=0) {
+		if (rectCollides(pacman, dots[i].rect) || dots[i].rect.col<=0) {
 			if (dots[i].isGhost && dots[i].rect.col > 0)
 				drawEnd();
 			else
