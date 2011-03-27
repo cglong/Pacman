@@ -99,7 +99,7 @@ void update() {
 }
 
 void draw() {
-	drawRect(oldPacman.row, oldPacman.col, oldPacman.width, oldPacman.height, BLACK);
+	drawRect(oldPacman.col, oldPacman.row, oldPacman.width, oldPacman.height, BLACK);
 	drawPacman(pacman.row, pacman.col);
 	
 	for (int i = 0; i < NUMDOTS; i++)
