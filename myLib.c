@@ -23,7 +23,7 @@ void waitForVblank() {
 void drawImage3(int x, int y, int width, int height, const u16* image) {
 	for (int i = 0; i < height; i++)
 		for (int j = 0; j < width; j++) {
-			REG_DMA3SAD = (vu32) &image[width * (i-1) + j];
+			REG_DMA3SAD = (vu32) &image[width * (i-1) + (j+1)];
 			REG_DMA3DAD = (vu32) &videoBuffer[OFFSET(i+x, y, SCREENWIDTH)];
 			REG_DMA3CNT = width | DMA_ON;
 		}
