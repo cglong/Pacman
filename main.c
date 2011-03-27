@@ -78,7 +78,7 @@ void update() {
 	oldPacman = pacman;
 	
 	for (int i = 0; i < NUMDOTS; i++) {
-		if (rectCollides(pacman, dots[i].rect) || dots[i].rect.col<=0) {
+		if (rectCollides(dots[i].rect, pacman) || dots[i].rect.col<=0) {
 			if (dots[i].isGhost && dots[i].rect.col > 0)
 				drawEnd();
 			else
@@ -100,7 +100,7 @@ void update() {
 
 void draw() {
 	drawRect(oldPacman.row, oldPacman.col, oldPacman.width, oldPacman.height, BLACK);
-	drawPacman(pacman.col, pacman.row);
+	drawPacman(pacman.row, pacman.col);
 	
 	for (int i = 0; i < NUMDOTS; i++)
 		drawRect(oldDots[i].rect.col, oldDots[i].rect.row, oldDots[i].rect.width, oldDots[i].rect.height, BLACK);
