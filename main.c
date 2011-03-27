@@ -77,9 +77,15 @@ void clear() {
 }
 
 void update() {
-	// Move dots
-	for (int i = 0; i < NUMDOTS; i++)
+	for (int i = 0; i < NUMDOTS; i++) {
+		if (rectCollides(pacman, dots[i].rect) || dots[i].rect.col<=0) {
+			if (dots[i].isGhost && dots[i].rect.col > 0)
+				drawEnd();
+			else
+				initDot(i);
+		}
 		dots[i].rect.col -= dots[i].del;
+	}
 	
 	// Move Pacman
 	if (KEY_DOWN_NOW(BUTTON_DOWN) && pacman.col < SCREENHEIGHT - pacman.height)
@@ -96,15 +102,8 @@ void draw() {
 	drawRect(oldPacman.row, oldPacman.col, oldPacman.width, oldPacman.height, BLACK);
 	drawPacman(pacman.col, pacman.row);
 	
-	for (int i = 0; i < NUMDOTS; i++) {
+	for (int i = 0; i < NUMDOTS; i++)
 		drawRect(oldDots[i].rect.col, oldDots[i].rect.row, oldDots[i].rect.width, oldDots[i].rect.height, BLACK);
-		if (rectCollides(pacman, dots[i].rect) || dots[i].rect.col<=0) {
-			if (dots[i].isGhost && dots[i].rect.col > 0)
-				drawEnd();
-			else
-				initDot(i);
-		}
-	}
 	
 	for (int i = 0; i < NUMDOTS; i++) {
 		drawDot(i);
