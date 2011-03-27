@@ -8,7 +8,7 @@
  * 
  * Quote/Fortune of the Day!
  * -------------------------
- * Man was predestined to have free will.  ~Hal Lee Luyah
+ * A great name for a new country song:  If I'd Shot You Sooner, I'd Be Out of Jail by Now.  ~Author Unknown
  * 
  * All bug reports / feature requests are to be sent to Brandon (brandon.whitehead@gatech.edu)
  */
