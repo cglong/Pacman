@@ -53,8 +53,8 @@ void initialize() {
 	
 	// Make Pacman and his shadow
 	pacman.height = pacman.width = 16;
-	pacman.row = 0;
-	pacman.col = (SCREENHEIGHT-pacman.height)/2;
+	pacman.row = (SCREENHEIGHT-pacman.height)/2;
+	pacman.col = 0;
 	
 	// Make dots
 	for (int i = 0; i < NUMDOTS; i++) {
@@ -88,14 +88,14 @@ void update() {
 	}
 	
 	// Move Pacman
-	if (KEY_DOWN_NOW(BUTTON_DOWN) && pacman.col < SCREENHEIGHT - pacman.height)
-		pacman.col++;
-	if (KEY_DOWN_NOW(BUTTON_UP) && pacman.col > 0)
-		pacman.col--;
-	if (KEY_DOWN_NOW(BUTTON_LEFT) && pacman.row > 0)
-		pacman.row--;
-	if (KEY_DOWN_NOW(BUTTON_RIGHT) && pacman.row < SCREENWIDTH - pacman.width)
+	if (KEY_DOWN_NOW(BUTTON_DOWN) && pacman.row < SCREENHEIGHT - pacman.height)
 		pacman.row++;
+	if (KEY_DOWN_NOW(BUTTON_UP) && pacman.row > 0)
+		pacman.row--;
+	if (KEY_DOWN_NOW(BUTTON_LEFT) && pacman.col > 0)
+		pacman.col--;
+	if (KEY_DOWN_NOW(BUTTON_RIGHT) && pacman.col < SCREENWIDTH - pacman.width)
+		pacman.col++;
 }
 
 void draw() {
