@@ -30,19 +30,10 @@ int main() {
 	drawTitle();
 	initialize();
 	clear();
-	
-	oldPacman = pacman;
-	for (int i = 0; i < NUMDOTS; i++)
-		oldDots[i] = dots[i];
-	
 	while (1) {
-		if (KEY_DOWN_NOW(BUTTON_SELECT))
-			main();
-		
 		update();
 		waitForVblank();
 		draw();
-		oldPacman = pacman;
 	}
 }
 
@@ -70,6 +61,10 @@ void initialize() {
 		initDot(i);
 		drawDot(i);
 	}
+	
+	oldPacman = pacman;
+	for (int i = 0; i < NUMDOTS; i++)
+		oldDots[i] = dots[i];
 }
 
 void clear() {
@@ -77,6 +72,11 @@ void clear() {
 }
 
 void update() {
+	if (KEY_DOWN_NOW(BUTTON_SELECT))
+			main();
+	
+	oldPacman = pacman;
+	
 	for (int i = 0; i < NUMDOTS; i++) {
 		if (rectCollides(pacman, dots[i].rect) || dots[i].rect.col<=0) {
 			if (dots[i].isGhost && dots[i].rect.col > 0)
