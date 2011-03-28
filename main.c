@@ -147,6 +147,7 @@ void drawTitle() {
 }
 
 void drawEnd() {
+	drawRect(0, 0, SCREENWIDTH, SCREENHEIGHT, BLACK);
 	drawImage3(0, 0, END_WIDTH, END_HEIGHT, end);
 	while (!KEY_DOWN_NOW(BUTTON_START));
 	main();
