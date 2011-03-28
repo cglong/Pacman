@@ -27,17 +27,17 @@ int ghostFrequency;
 
 int main() {
 	REG_DISPCNT = MODE3 | BG2_ENABLE;
-	drawTitle();
 	initialize();
-	clear();
 	while (1) {
-		update();
 		waitForVblank();
+		clear();
+		update();
 		draw();
 	}
 }
 
 void initialize() {
+	drawTitle();
 	DOT emptyDot;
 	emptyDot.rect.row = 0;
 	emptyDot.rect.col = 0;
@@ -68,7 +68,9 @@ void initialize() {
 }
 
 void clear() {
-	drawRect(0, 0, SCREENWIDTH, SCREENHEIGHT, BLACK);
+	drawRect(oldPacman.col, oldPacman.row, oldPacman.width, oldPacman.height, BLACK);
+	for (int i = 0; i < NUMDOTS; i++)
+		drawRect(oldDots[i].rect.col, oldDots[i].rect.row, oldDots[i].rect.width, oldDots[i].rect.height, BLACK);
 }
 
 void update() {
@@ -99,11 +101,7 @@ void update() {
 }
 
 void draw() {
-	drawRect(oldPacman.col, oldPacman.row, oldPacman.width, oldPacman.height, BLACK);
 	drawPacman(pacman.row, pacman.col);
-	
-	for (int i = 0; i < NUMDOTS; i++)
-		drawRect(oldDots[i].rect.col, oldDots[i].rect.row, oldDots[i].rect.width, oldDots[i].rect.height, BLACK);
 	
 	for (int i = 0; i < NUMDOTS; i++) {
 		drawDot(i);
@@ -145,6 +143,7 @@ void drawPacman(int x, int y) {
 void drawTitle() {
 	drawImage3(0, 0, TITLE_WIDTH, TITLE_HEIGHT, title);
 	while (!KEY_DOWN_NOW(BUTTON_START));
+	drawRect(0, 0, SCREENWIDTH, SCREENHEIGHT, BLACK);
 }
 
 void drawEnd() {
