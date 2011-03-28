@@ -68,16 +68,18 @@ void initialize() {
 }
 
 void clear() {
+	oldPacman = pacman;
 	drawRect(oldPacman.col, oldPacman.row, oldPacman.width, oldPacman.height, BLACK);
-	for (int i = 0; i < NUMDOTS; i++)
+	
+	for (int i = 0; i < NUMDOTS; i++) {
+		oldDots[i] = dots[i];
 		drawRect(oldDots[i].rect.col, oldDots[i].rect.row, oldDots[i].rect.width, oldDots[i].rect.height, BLACK);
+	}
 }
 
 void update() {
 	if (KEY_DOWN_NOW(BUTTON_SELECT))
 			main();
-	
-	oldPacman = pacman;
 	
 	for (int i = 0; i < NUMDOTS; i++) {
 		if (rectCollides(dots[i].rect, pacman) || dots[i].rect.col<=0) {
@@ -103,10 +105,8 @@ void update() {
 void draw() {
 	drawPacman(pacman.row, pacman.col);
 	
-	for (int i = 0; i < NUMDOTS; i++) {
+	for (int i = 0; i < NUMDOTS; i++)
 		drawDot(i);
-		oldDots[i] = dots[i];
-	}
 }
 
 void initDot(int i) {
@@ -147,7 +147,6 @@ void drawTitle() {
 }
 
 void drawEnd() {
-	drawRect(0, 0, SCREENWIDTH, SCREENHEIGHT, BLACK);
 	drawImage3(0, 0, END_WIDTH, END_HEIGHT, end);
 	while (!KEY_DOWN_NOW(BUTTON_START));
 	main();
