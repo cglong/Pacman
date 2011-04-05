@@ -26,7 +26,7 @@ int deltas[] = {2, 3, 4, 5};
 int ghostFrequency;
 
 int main() {
-	REG_DISPCNT = MODE3 | BG2_ENABLE;
+	REG_DISPCNT = MODE4 | BG2_ENABLE;
 	initialize();
 	while (1) {
 		waitForVblank();

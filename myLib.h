@@ -8,6 +8,7 @@
 
 #define REG_DISPCNT *(unsigned short *)0x4000000
 #define MODE3 3
+#define MODE4 4
 #define BG2_ENABLE (1<<10)
 
 #define OFFSET(r, c, rowlen) ((r)*(rowlen)+(c))
