@@ -53,7 +53,7 @@ void initialize() {
 	
 	// Make Pacman and his shadow
 	pacman.height = pacman.width = 16;
-	pacman.row = (SCREENHEIGHT-pacman.height-6)/2;
+	pacman.row = (SCREENHEIGHT-pacman.height-TEXT_HEIGHT)/2;
 	pacman.col = 0;
 	
 	// Make dots
@@ -92,7 +92,7 @@ void update() {
 	}
 	
 	// Move Pacman
-	if (KEY_DOWN_NOW(BUTTON_DOWN) && pacman.row < SCREENHEIGHT - pacman.height - 6)
+	if (KEY_DOWN_NOW(BUTTON_DOWN) && pacman.row < SCREENHEIGHT - pacman.height - TEXT_HEIGHT)
 		pacman.row++;
 	if (KEY_DOWN_NOW(BUTTON_UP) && pacman.row > 0)
 		pacman.row--;
@@ -120,7 +120,7 @@ void initDot(int i) {
 			ghostFrequency /= 2;
 	}
 	
-	dots[i].rect.row = rand() % (SCREENHEIGHT-dots[i].rect.height-6);
+	dots[i].rect.row = rand() % (SCREENHEIGHT-dots[i].rect.height-TEXT_HEIGHT);
 	dots[i].rect.col = SCREENWIDTH - dots[i].rect.width;
 	dots[i].del = deltas[rand() % NUMDELTAS];
 }

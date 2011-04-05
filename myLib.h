@@ -5,6 +5,7 @@
 #include "dma.h"
 #include "buttons.h"
 #include "rect.h"
+#include "text.h"
 
 #define REG_DISPCNT *(unsigned short *)0x4000000
 #define MODE3 3
@@ -30,5 +31,7 @@ void waitForVblank();
 void drawImage3(int x, int y, int width, int height, const u16* image);
 int rectCollides(Rect a, Rect b);
 void setPalette(const u16 *array, int size, int start);
+void drawChar4(int row, int col, char ch, u8 index);
+void drawString4(int row, int col, char* str, u8 index);
 
 #endif

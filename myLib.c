@@ -68,3 +68,16 @@ void setPalette(const u16 *array, int size, int start) {
 	for (int i = start; i < start + size; i++)
 		PALETTE[i] = array[i];
 }
+
+void drawChar4(int row, int col, char ch, u8 index) {
+	for (int c=0; c<TEXT_WIDTH; c++) {
+		char byte = fontdata[c];
+		for (int r=0; r<TEXT_HEIGHT; r++)
+			if ((byte >> r) & 1)
+				setPixel4(r+row, c+col, index);
+	}
+}
+
+void drawString4(int row, int col, char* str, u8 index) {
+	
+}
