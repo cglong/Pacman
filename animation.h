@@ -8,7 +8,7 @@ typedef struct {
 	int maxFrames;
 	int delay;
 	int counter;
-	int *images[];
+	u16 *images[];
 } Animation;
 
 #endif
