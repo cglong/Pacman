@@ -69,11 +69,11 @@ void initialize() {
 
 void clear() {
 	oldPacman = pacman;
-	drawRect(oldPacman.col, oldPacman.row, oldPacman.width, oldPacman.height, BLACK);
+	drawRect4(oldPacman.col, oldPacman.row, oldPacman.width, oldPacman.height, BLACKINDEX);
 	
 	for (int i = 0; i < NUMDOTS; i++) {
 		oldDots[i] = dots[i];
-		drawRect(oldDots[i].rect.col, oldDots[i].rect.row, oldDots[i].rect.width, oldDots[i].rect.height, BLACK);
+		drawRect4(oldDots[i].rect.col, oldDots[i].rect.row, oldDots[i].rect.width, oldDots[i].rect.height, BLACKINDEX);
 	}
 }
 
@@ -129,7 +129,7 @@ void drawDot(int i) {
 	if (dots[i].isGhost)
 		drawGhost(dots[i].rect.row, dots[i].rect.col);
 	else
-		drawRect(dots[i].rect.col, dots[i].rect.row, dots[i].rect.width, dots[i].rect.height, WHITE);
+		drawRect4(dots[i].rect.col, dots[i].rect.row, dots[i].rect.width, dots[i].rect.height, WHITEINDEX);
 }
 
 void drawGhost(int x, int y) {
@@ -143,7 +143,7 @@ void drawPacman(int x, int y) {
 void drawTitle() {
 	drawImage3(0, 0, TITLE_WIDTH, TITLE_HEIGHT, title);
 	while (!KEY_DOWN_NOW(BUTTON_START));
-	drawRect(0, 0, SCREENWIDTH, SCREENHEIGHT, BLACK);
+	drawRect4(0, 0, SCREENWIDTH, SCREENHEIGHT, BLACKINDEX);
 }
 
 void drawEnd() {

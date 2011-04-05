@@ -62,8 +62,8 @@ int rectCollides(Rect a, Rect b) {
 }
 
 void setPalette(const u16 *array, int size, int start) {
-	PALETTE[0] = BLACK;
-	PALETTE[1] = WHITE;
+	PALETTE[BLACKINDEX] = BLACK;
+	PALETTE[WHITEINDEX] = WHITE;
 	
 	for (int i = start; i < start + size; i++)
 		PALETTE[i] = array[i];

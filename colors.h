@@ -12,4 +12,6 @@
 
 #define YELLOW RGB(31,31,0)
 
+enum {BLACKINDEX, WHITEINDEX};
+
 #endif
