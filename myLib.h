@@ -29,6 +29,7 @@ void drawRect(int r, int c, int width, int height, u16 color);
 void drawRect4(int row, int col, int height, int width, u8 index);
 void waitForVblank();
 void drawImage3(int x, int y, int width, int height, const u16* image);
+void drawImage4(int x, int y, int width, int height, const u16* image);
 int rectCollides(Rect a, Rect b);
 void setPalette(const u16 *array, int size, int start);
 void drawChar4(int row, int col, char ch, u8 index);

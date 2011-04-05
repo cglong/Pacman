@@ -48,6 +48,14 @@ void drawImage3(int x, int y, int width, int height, const u16* image) {
 	}
 }
 
+void drawImage4(int x, int y, int width, int height, const u16* image) {
+	for (int i = 0; i < height; i++) {
+		REG_DMA3SAD = (vu32) &image[width * i];
+		REG_DMA3DAD = (vu32) videoBuffer + OFFSET(i+x, y, SCREENWIDTH)/2;
+		REG_DMA3CNT = width/2 | DMA_ON;
+	}
+}
+
 int rectCollides(Rect a, Rect b) {
 	int aRight = a.col + a.width;
 	int aBottom = a.row + a.height;
