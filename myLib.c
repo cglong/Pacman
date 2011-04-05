@@ -65,7 +65,6 @@ void setPalette(const u16 *array, int size, int start) {
 	PALETTE[0] = BLACK;
 	PALETTE[1] = WHITE;
 	
-	for (int i = start; i < start + size; i++) {
+	for (int i = start; i < start + size; i++)
 		PALETTE[i] = array[i];
-	}
 }
