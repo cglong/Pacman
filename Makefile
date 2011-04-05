@@ -15,7 +15,7 @@ OFILES = main.o myLib.o ghost.o end.o title.o Pacman.o
 # The header files you have created.
 # This is necessary to determine when to recompile for files.
 # This should be a space (SPACE!) separated list of .h files
-HFILES = myLib.h colors.h dma.h buttons.h dot.h ghost.h end.h title.h rect.h Pacman.h
+HFILES = myLib.h colors.h dma.h buttons.h dot.h ghost.h end.h title.h rect.h Pacman.h animation.h
 
 # The flags to run the vba program with
 # for a list of options run /usr/local/cs2110-tools/bin/vbam
