@@ -58,5 +58,9 @@ int rectCollides(Rect a, Rect b) {
 	if ((aRight >= b.col && aRight <= bRight) || (a.col >= b.col && a.col <= bRight))
 		if ((a.row >= b.row && a.row <= bBottom) || (aBottom >= b.row && aBottom <= bBottom))
 			return 1;
-	return 0;	
+	return 0;
+}
+
+void setPalette(const u16 *array, int size, int start) {
+	PALETTE[0] = WHITE;
 }

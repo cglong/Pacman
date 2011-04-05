@@ -14,6 +14,7 @@
 #define OFFSET(r, c, rowlen) ((r)*(rowlen)+(c))
 #define SCREENWIDTH 240
 #define SCREENHEIGHT 160
+#define PALETTE ((unsigned short *)0x5000000)
 
 typedef unsigned char u8;
 typedef unsigned short u16;
@@ -28,5 +29,6 @@ void drawRect4(int row, int col, int height, int width, u8 index);
 void waitForVblank();
 void drawImage3(int x, int y, int width, int height, const u16* image);
 int rectCollides(Rect a, Rect b);
+void setPalette(const u16 *array, int size, int start);
 
 #endif
