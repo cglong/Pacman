@@ -92,7 +92,7 @@ void update() {
 	}
 	
 	// Move Pacman
-	if (KEY_DOWN_NOW(BUTTON_DOWN) && pacman.row < SCREENHEIGHT - pacman.height)
+	if (KEY_DOWN_NOW(BUTTON_DOWN) && pacman.row < SCREENHEIGHT - pacman.height - 6)
 		pacman.row++;
 	if (KEY_DOWN_NOW(BUTTON_UP) && pacman.row > 0)
 		pacman.row--;
@@ -120,7 +120,7 @@ void initDot(int i) {
 			ghostFrequency /= 2;
 	}
 	
-	dots[i].rect.row = rand() % (SCREENHEIGHT-dots[i].rect.height);
+	dots[i].rect.row = rand() % (SCREENHEIGHT-dots[i].rect.height-6);
 	dots[i].rect.col = SCREENWIDTH - dots[i].rect.width;
 	dots[i].del = deltas[rand() % NUMDELTAS];
 }
