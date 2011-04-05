@@ -15,12 +15,14 @@
 #define SCREENWIDTH 240
 #define SCREENHEIGHT 160
 
+typedef unsigned char u8;
 typedef unsigned short u16;
 typedef unsigned int u32;
 typedef volatile unsigned int vu32;
 extern unsigned short *videoBuffer;
 
 void setPixel(int r, int c, u16 color);
+void setPixel4(int r, int c, u8 index);
 void drawRect(int r, int c, int width, int height, u16 color);
 void waitForVblank();
 void drawImage3(int x, int y, int width, int height, const u16* image);

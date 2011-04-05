@@ -7,6 +7,15 @@ void setPixel(int r, int c, u16 color) {
 	videoBuffer[OFFSET(r, c, SCREENWIDTH)] = color;
 }
 
+void setPixel4(int r, int c, u8 index) {
+	u16 pixel = videoBuffer[(r * 240 + c) / 2];
+	if (c & 1)
+		pixel = (pixel & 0xFF) | (index << 8);
+	else
+		pixel = (pixel & 0xFF00) | index;
+	videoBuffer[(r * 240 + c) / 2] = pixel;
+}
+
 void drawRect(int x, int y, int width, int height, u16 color) {
 	for (int i = 0; i < height; i++) {
 		REG_DMA3SAD = (vu32) &color;
