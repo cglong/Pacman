@@ -24,6 +24,17 @@ void drawRect(int x, int y, int width, int height, u16 color) {
 	}
 }
 
+void drawRect4(int row, int col, int height, int width, u8 index) {
+	int r;
+	volatile u16 color = (index<<8) | index;
+	if (width > 1)
+		for (r=0; r < height; r++) {
+			DMA[3].src = &color;
+			DMA[3].dst = videoBuffer + OFFSET(row+r, col, 240)/2;
+			DMA[3].cnt = width/2 | DMA_SOURCE_FIXED | DMA_ON;
+		}
+}
+
 void waitForVblank() {
 	while(*scanLineCounter > 160);
 	while(*scanLineCounter < 160);

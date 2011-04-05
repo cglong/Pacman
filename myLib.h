@@ -24,6 +24,7 @@ extern unsigned short *videoBuffer;
 void setPixel(int r, int c, u16 color);
 void setPixel4(int r, int c, u8 index);
 void drawRect(int r, int c, int width, int height, u16 color);
+void drawRect4(int row, int col, int height, int width, u8 index);
 void waitForVblank();
 void drawImage3(int x, int y, int width, int height, const u16* image);
 int rectCollides(Rect a, Rect b);
