@@ -80,7 +80,7 @@ void drawChar4(int row, int col, char ch, u8 index) {
 
 void drawString4(int row, int col, char* str, u8 index) {
 	while (*str) {
-		drawChar(row, col, *str++, index);
+		drawChar4(row, col, *str++, index);
 		col += TEXT_WIDTH;
 	}
 }
