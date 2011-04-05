@@ -53,7 +53,7 @@ void initialize() {
 	
 	// Make Pacman and his shadow
 	pacman.height = pacman.width = 16;
-	pacman.row = (SCREENHEIGHT-pacman.height)/2;
+	pacman.row = (SCREENHEIGHT-pacman.height-6)/2;
 	pacman.col = 0;
 	
 	// Make dots
