@@ -29,9 +29,9 @@ void drawRect4(int row, int col, int height, int width, u8 index) {
 	volatile u16 color = (index<<8) | index;
 	if (width > 1)
 		for (r=0; r < height; r++) {
-			DMA[3].src = &color;
-			DMA[3].dst = videoBuffer + OFFSET(row+r, col, 240)/2;
-			DMA[3].cnt = width/2 | DMA_SOURCE_FIXED | DMA_ON;
+			REG_DMA3SAD = &color;
+			REG_DMA3DAD = videoBuffer + OFFSET(row+r, col, 240)/2;
+			REG_DMA3CNT = width/2 | DMA_SOURCE_FIXED | DMA_ON;
 		}
 }
 
