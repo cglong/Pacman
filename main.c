@@ -143,14 +143,14 @@ void drawPacman(int x, int y) {
 }
 
 void drawTitle() {
-	setPalette(title_palette, TITLE_PALETTE_SIZE, TITLE_PALETTE_OFFSET);
+	setPalette(title_palette, TITLE_PALETTE_SIZE, 0);
 	drawImage4(0, 0, TITLE_WIDTH, TITLE_HEIGHT, title);
 	while (!KEY_DOWN_NOW(BUTTON_START));
 	drawRect4(0, 0, SCREENWIDTH, SCREENHEIGHT, BLACKINDEX);
 }
 
 void drawEnd() {
-	setPalette(end_palette, END_PALETTE_SIZE, END_PALETTE_OFFSET);
+	setPalette(end_palette, END_PALETTE_SIZE, 0);
 	drawImage4(0, 0, END_WIDTH, END_HEIGHT, end);
 	while (!KEY_DOWN_NOW(BUTTON_START));
 	main();
