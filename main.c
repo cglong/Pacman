@@ -25,6 +25,7 @@ Rect pacman, oldPacman;
 DOT dots[NUMDOTS], oldDots[NUMDOTS];
 int deltas[] = {2, 3, 4, 5};
 int ghostFrequency;
+int score;
 
 int main() {
 	REG_DISPCNT = MODE4 | BG2_ENABLE;
@@ -64,6 +65,7 @@ void initialize() {
 		dots[i] = oldDots[i] = emptyDot;
 	
 	ghostFrequency = 32;
+	score = 0;
 	
 	// Make Pacman and his shadow
 	pacman.height = pacman.width = 16;
@@ -99,8 +101,10 @@ void update() {
 		if (rectCollides(dots[i].rect, pacman) || dots[i].rect.col<=0) {
 			if (dots[i].isGhost && dots[i].rect.col > 0)
 				drawEnd();
-			else
+			else {
 				initDot(i);
+				score++;
+			}
 		}
 		dots[i].rect.col -= dots[i].del;
 	}
