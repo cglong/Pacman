@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "myLib.h"
 #include "dot.h"
 #include "ghost.h"
@@ -26,6 +27,7 @@ DOT dots[NUMDOTS], oldDots[NUMDOTS];
 int deltas[] = {2, 3, 4, 5};
 int ghostFrequency;
 int score;
+char string[41];
 
 int main() {
 	REG_DISPCNT = MODE4 | BG2_ENABLE;
@@ -97,6 +99,8 @@ void update() {
 	if (KEY_DOWN_NOW(BUTTON_SELECT))
 			main();
 	
+	sprintf(string, "Score = %d", score);
+	
 	for (int i = 0; i < NUMDOTS; i++) {
 		if (rectCollides(dots[i].rect, pacman) || dots[i].rect.col<=0) {
 			if (dots[i].isGhost && dots[i].rect.col > 0)
@@ -122,6 +126,7 @@ void update() {
 
 void draw() {
 	drawPacman(pacman.row, pacman.col);
+	drawString4(SCREENHEIGHT-TEXT_HEIGHT, 0, string, WHITEINDEX);
 	
 	for (int i = 0; i < NUMDOTS; i++)
 		drawDot(i);
