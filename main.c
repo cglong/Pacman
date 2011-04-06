@@ -19,6 +19,7 @@ void drawGhost(int x, int y);
 void drawTitle();
 void drawEnd();
 void drawPacman(int x, int y);
+void flipPage();
 
 Rect pacman, oldPacman;
 DOT dots[NUMDOTS], oldDots[NUMDOTS];
@@ -30,9 +31,20 @@ int main() {
 	initialize();
 	while (1) {
 		waitForVblank();
+		flipPage();
 		clear();
 		update();
 		draw();
+	}
+}
+
+void flipPage() {
+	if (REG_DISPCTL & BUFFER1FLAG) {
+		videoBuffer = BUFFER1;
+		REG_DISPCTL &= ~BUFFER1FLAG;
+	} else {
+		videoBuffer = BUFFER0;
+		REG_DISPCTL |= BUFFER1FLAG;
 	}
 }
 

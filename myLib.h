@@ -11,6 +11,9 @@
 #define MODE3 3
 #define MODE4 4
 #define BG2_ENABLE (1<<10)
+#define BUFFER0 (u16 *)0x6000000
+#define BUFFER1 (u16 *)0x600A000
+#define BUFFER1FLAG (1<<4)
 
 #define OFFSET(r, c, rowlen) ((r)*(rowlen)+(c))
 #define SCREENWIDTH 240
