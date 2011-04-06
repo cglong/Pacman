@@ -113,7 +113,7 @@ void draw() {
 
 void initDot(int i) {
 	if ((rand() % ghostFrequency)) {
-		dots[i].rect.width = dots[i].rect.height = 3;
+		dots[i].rect.width = dots[i].rect.height = 4;
 		dots[i].isGhost = 0;
 	} else {
 		dots[i].rect.width = dots[i].rect.height = 16;
