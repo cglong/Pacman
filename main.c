@@ -38,6 +38,8 @@ int main() {
 
 void initialize() {
 	drawTitle();
+	setPalette(Pacman_palette, PACMAN_PALETTE_SIZE, PACMAN_PALETTE_OFFSET);
+	setPalette(ghost_palette, PACMAN_PALETTE_SIZE, GHOST_PALETTE_OFFSET);
 	DOT emptyDot;
 	emptyDot.rect.row = 0;
 	emptyDot.rect.col = 0;
@@ -133,21 +135,23 @@ void drawDot(int i) {
 }
 
 void drawGhost(int x, int y) {
-	drawImage3(x, y, GHOST_WIDTH, GHOST_HEIGHT, ghost);
+	drawImage4(x, y, GHOST_WIDTH, GHOST_HEIGHT, ghost);
 }
 
 void drawPacman(int x, int y) {
-	drawImage3(x, y, PACMAN_WIDTH, PACMAN_HEIGHT, Pacman);
+	drawImage4(x, y, PACMAN_WIDTH, PACMAN_HEIGHT, Pacman);
 }
 
 void drawTitle() {
-	drawImage3(0, 0, TITLE_WIDTH, TITLE_HEIGHT, title);
+	setPalette(title_palette, TITLE_PALETTE_SIZE, TITLE_PALETTE_OFFSET);
+	drawImage4(0, 0, TITLE_WIDTH, TITLE_HEIGHT, title);
 	while (!KEY_DOWN_NOW(BUTTON_START));
 	drawRect4(0, 0, SCREENWIDTH, SCREENHEIGHT, BLACKINDEX);
 }
 
 void drawEnd() {
-	drawImage3(0, 0, END_WIDTH, END_HEIGHT, end);
+	setPalette(end_palette, END_PALETTE_SIZE, END_PALETTE_OFFSET);
+	drawImage4(0, 0, END_WIDTH, END_HEIGHT, end);
 	while (!KEY_DOWN_NOW(BUTTON_START));
 	main();
 }
