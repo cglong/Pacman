@@ -39,12 +39,12 @@ int main() {
 }
 
 void flipPage() {
-	if (REG_DISPCTL & BUFFER1FLAG) {
+	if (REG_DISPCNT & BUFFER1FLAG) {
 		videoBuffer = BUFFER1;
-		REG_DISPCTL &= ~BUFFER1FLAG;
+		REG_DISPCNT &= ~BUFFER1FLAG;
 	} else {
 		videoBuffer = BUFFER0;
-		REG_DISPCTL |= BUFFER1FLAG;
+		REG_DISPCNT |= BUFFER1FLAG;
 	}
 }
 
